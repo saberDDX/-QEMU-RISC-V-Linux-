@@ -1,0 +1,5 @@
+/output/
+/vendor/
+*.pyc
+__pycache__/
+/evidence/*.raw

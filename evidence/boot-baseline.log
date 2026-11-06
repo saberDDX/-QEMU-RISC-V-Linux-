@@ -1,0 +1,507 @@
+qemu-system-riscv64: warning: nic cadence_gem.0 has no peer
+Quard Star MaskRom v0.1
+SD_BOOT
+Load lowlevelboot.bin
+Load address: 0x20000
+Loading: ################################################################ 256KiB
+Quard Star LowLevelBoot
+In SD BOOT...
+Load opensbi_fw.bin
+Load address: 0xbff80000
+Loading: ################################################################ 512KiB
+Load qemu_sbi.dtb
+Load address: 0xbff00000
+Loading: ################################################################ 512KiB
+Load trusted_fw.bin
+Load address: 0xbf800000
+Loading: ################################################################ 4MiB
+Load qemu_uboot.dtb
+Load address: 0xb0000000
+Loading: ################################################################ 512KiB
+Load u-boot.bin
+Load address: 0xb0200000
+Loading: ################################################################ 4MiB
+
+OpenSBI v1.2
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name             : riscv-quard-star,qemu
+Platform Features         : medeleg
+Platform HART Count       : 8
+Platform IPI Device       : aclint-mswi
+Platform Timer Device     : aclint-mtimer @ 10000000Hz
+Platform Console Device   : uart8250
+Platform HSM Device       : ---
+Platform PMU Device       : ---
+Platform Reboot Device    : sifive_test
+Platform Shutdown Device  : sifive_test
+Firmware Base             : 0xbff80000
+Firmware Size             : 304 KB
+Runtime SBI Version       : 1.0
+
+Domain0 Name              : root
+Domain0 Boot HART         : 0
+Domain0 HARTs             : 0,1,2,3,4,5,6,7
+Domain0 Region00          : 0x0000000002000000-0x000000000200ffff (I)
+Domain0 Region01          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain0 Region02          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain0 Next Address      : 0x0000000000000000
+Domain0 Next Arg1         : 0x00000000bff00000
+Domain0 Next Mode         : S-mode
+Domain0 SysReset          : yes
+
+Domain1 Name              : trusted-domain
+Domain1 Boot HART         : 7
+Domain1 HARTs             : 7*
+Domain1 Region00          : 0x0000000010002000-0x00000000100020ff (I,R,W,X)
+Domain1 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain1 Region02          : 0x00000000bff00000-0x00000000bff7ffff (R,W,X)
+Domain1 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain1 Region04          : 0x00000000bfe00000-0x00000000bfefffff (R,W,X)
+Domain1 Region05          : 0x00000000bfc00000-0x00000000bfdfffff (R,W,X)
+Domain1 Region06          : 0x00000000bf800000-0x00000000bfbfffff (R,W,X)
+Domain1 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain1 Next Address      : 0x00000000bf800000
+Domain1 Next Arg1         : 0x0000000000000000
+Domain1 Next Mode         : S-mode
+Domain1 SysReset          : yes
+
+Domain2 Name              : untrusted-domain
+Domain2 Boot HART         : 0
+Domain2 HARTs             : 0*,1*,2*,3*,4*,5*,6*
+Domain2 Region00          : 0x0000000010002000-0x00000000100020ff (I)
+Domain2 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain2 Region02          : 0x00000000bff00000-0x00000000bff7ffff ()
+Domain2 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain2 Region04          : 0x00000000bfe00000-0x00000000bfefffff ()
+Domain2 Region05          : 0x00000000bfc00000-0x00000000bfdfffff ()
+Domain2 Region06          : 0x00000000bf800000-0x00000000bfbfffff ()
+Domain2 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain2 Next Address      : 0x00000000b0200000
+Domain2 Next Arg1         : 0x00000000b0000000
+Domain2 Next Mode         : S-mode
+Domain2 SysReset          : yes
+
+Boot HART ID              : 0
+Boot HART Domain          : untrusted-domain
+Boot HART Priv Version    : v1.12
+Boot HART Base ISA        : rv64imafdch
+Boot HART ISA Extensions  : time,sstc
+Boot HART PMP Count       : 16
+Boot HART PMP Granularity : 4
+Boot HART PMP Address Bits: 54
+Boot HART MHPM Count      : 16
+Boot HART MIDELEG         : 0x0000000000001666
+Boot HART MEDELEG         : 0x0000000000f0b509
+
+
+U-Boot 2023.04 (Nov 04 2026 - 02:24:37 +0000)
+
+CPU:   rv64imafdchsu
+Model: riscv-quard-star,qemu
+DRAM:  1016 MiB
+Core:  60 devices, 23 uclasses, devicetree: separate
+Flash: 16 MiB
+NAND:  Muxed OneNAND(DDP) 256MB 1.8V 16-bit (0x48)
+OneNAND version = 0x0000
+Chip support all block unlock
+Scanning device for bad blocks
+OneNAND: 256 MiB
+MMC:   sdmmc@1000a000: 0
+Loading Environment from nowhere... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@10010000
+Hit any key to stop autoboot:  2  1  0 
+
+Device 0: QEMU VirtIO Block Device
+            Type: Hard Disk
+            Capacity: 353.0 MB = 0.3 GB (722944 x 512)
+... is now current device
+Scanning virtio 0:1...
+Found U-Boot script /boot.scr
+340 bytes read in 12 ms (27.3 KiB/s)
+## Executing script at 82700000
+Quard Star BSP: loading kernel and device tree from virtio disk
+14017 bytes read in 8 ms (1.7 MiB/s)
+13626368 bytes read in 22 ms (590.7 MiB/s)
+Moving Image from 0x80000000 to 0x80200000, end=80f7d000
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+Working FDT set to 82000000
+   Using Device Tree in place at 0000000082000000, end 00000000820066c0
+Working FDT set to 82000000
+
+Starting kernel ...
+
+[    0.000000] Linux version 6.1.11 (agent@d53d49725e6d) (riscv64-unknown-linux-gnu-gcc (GCC) 11.1.0, GNU ld (GNU Binutils) 2.36.1) #3 SMP PREEMPT Wed Nov  4 02:49:25 UTC 2026
+[    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000
+[    0.000000] Machine model: riscv-quard-star,qemu
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: bootconsole [sbi0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] cma: Reserved 16 MiB at 0x00000000be800000
+[    0.000000] Reserved memory: created DMA memory pool at 0x00000000b0000000, size 248 MiB
+[    0.000000] OF: reserved mem: initialized node linux,cma@b0000000, compatible id shared-dma-pool
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000] SBI specification v1.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10002
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI HSM extension detected
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] riscv: base ISA extensions acdfhim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 18 pages/cpu s36024 r8192 d29512 u73728
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 255528
+[    0.000000] Kernel command line: root=/dev/vda2 rw console=ttyS0 earlycon=sbi loglevel=7
+[    0.000000] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]       fixmap : 0xff1bfffffee00000 - 0xff1bffffff000000   (2048 kB)
+[    0.000000]       pci io : 0xff1bffffff000000 - 0xff1c000000000000   (  16 MB)
+[    0.000000]      vmemmap : 0xff1c000000000000 - 0xff20000000000000   (1024 TB)
+[    0.000000]      vmalloc : 0xff20000000000000 - 0xff60000000000000   (16384 TB)
+[    0.000000]      modules : 0xffffffff00d7d000 - 0xffffffff80000000   (2034 MB)
+[    0.000000]       lowmem : 0xff60000000000000 - 0xff6000003f600000   (1014 MB)
+[    0.000000]       kernel : 0xffffffff80000000 - 0xffffffffffffffff   (2047 MB)
+[    0.000000] Memory: 752252K/1038336K available (8934K kernel code, 991K rwdata, 2980K rodata, 391K init, 503K bss, 269700K reserved, 16384K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=7, Nodes=1
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=7.
+[    0.000000] rcu: 	RCU debug extended QS entry/exit.
+[    0.000000] 	Trampoline variant of Tasks RCU enabled.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=7
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 64 local interrupts mapped
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] riscv-intc: unable to find hart id for /cpus/cpu@7/interrupt-controller
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] plic: failed to parse hart ID for context 15.
+[    0.000000] plic: plic@c000000: mapped 64 interrupts with 7 handlers for 16 contexts.
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] riscv-timer: riscv_timer_init_dt: Registering clocksource cpuid [0] hartid [0]
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x24e6a1710, max_idle_ns: 440795202120 ns
+[    0.000104] sched_clock: 64 bits at 10MHz, resolution 100ns, wraps every 4398046511100ns
+[    0.014883] Console: colour dummy device 80x25
+[    0.017429] Calibrating delay loop (skipped), value calculated using timer frequency.. 20.00 BogoMIPS (lpj=40000)
+[    0.020419] pid_max: default: 32768 minimum: 301
+[    0.022344] LSM: Security Framework initializing
+[    0.027801] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.029739] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.067576] /cpus/cpu-map/cluster1: empty cluster
+[    0.093817] cblist_init_generic: Setting adjustable number of callback queues.
+[    0.096212] cblist_init_generic: Setting shift to 3 and lim to 1.
+[    0.097393] cblist_init_generic: Setting shift to 3 and lim to 1.
+[    0.104418] riscv: ELF compat mode supported
+[    0.104798] ASID allocator using 16 bits (65536 entries)
+[    0.109071] rcu: Hierarchical SRCU implementation.
+[    0.110827] rcu: 	Max phase no-delay instances is 1000.
+[    0.125884] EFI services will not be available.
+[    0.134343] smp: Bringing up secondary CPUs ...
+[    0.187010] smp: Brought up 1 node, 7 CPUs
+[    0.205455] devtmpfs: initialized
+[    0.225434] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.227739] futex hash table entries: 2048 (order: 5, 131072 bytes, linear)
+[    0.251880] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.256609] audit: initializing netlink subsys (disabled)
+[    0.260642] audit: type=2000 audit(0.180:1): state=initialized audit_enabled=0 res=1
+[    0.265750] cpuidle: using governor menu
+[    0.297511] platform panel: Fixing up cyclic dependency with 10013000.lcdc
+[    0.331261] HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.332835] HugeTLB: 0 KiB vmemmap can be freed for a 1.00 GiB page
+[    0.334511] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.336068] HugeTLB: 0 KiB vmemmap can be freed for a 2.00 MiB page
+[    0.357080] SCSI subsystem initialized
+[    0.361325] usbcore: registered new interface driver usbfs
+[    0.362793] usbcore: registered new interface driver hub
+[    0.363422] usbcore: registered new device driver usb
+[    0.371097] i2c i2c-0: IMX I2C adapter registered
+[    0.377380] i2c 1-001a: Fixing up cyclic dependency with 1000b000.i2s
+[    0.379005] i2c i2c-1: IMX I2C adapter registered
+[    0.381621] i2c i2c-2: IMX I2C adapter registered
+[    0.384110] Advanced Linux Sound Architecture Driver Initialized.
+[    0.406676] vgaarb: loaded
+[    0.442777] clocksource: Switched to clocksource riscv_clocksource
+[    0.493041] NET: Registered PF_INET protocol family
+[    0.496464] IP idents hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[    0.505402] tcp_listen_portaddr_hash hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    0.509130] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.512898] TCP established hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.515768] TCP bind hash table entries: 8192 (order: 7, 524288 bytes, linear)
+[    0.517399] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.519430] UDP hash table entries: 512 (order: 3, 49152 bytes, linear)
+[    0.521596] UDP-Lite hash table entries: 512 (order: 3, 49152 bytes, linear)
+[    0.524503] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.535983] RPC: Registered named UNIX socket transport module.
+[    0.538106] RPC: Registered udp transport module.
+[    0.539496] RPC: Registered tcp transport module.
+[    0.540637] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.542430] PCI: CLS 0 bytes, default 64
+[    0.555430] kvm [1]: hypervisor extension available
+[    0.556238] kvm [1]: using Sv57x4 G-stage page table format
+[    0.557947] kvm [1]: VMID 14 bits available
+[    0.567791] workingset: timestamp_bits=46 max_order=18 bucket_order=0
+[    0.594518] NFS: Registering the id_resolver key type
+[    0.597847] Key type id_resolver registered
+[    0.599461] Key type id_legacy registered
+[    0.600781] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[    0.602758] nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver Registering...
+[    0.605243] jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.
+[    0.608287] 9p: Installing v9fs 9p2000 file system support
+[    0.611720] NET: Registered PF_ALG protocol family
+[    0.656309] alg: self-tests for CTR-KDF (hmac(sha256)) passed
+[    0.657817] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 248)
+[    0.659709] io scheduler mq-deadline registered
+[    0.659922] io scheduler kyber registered
+[    0.680504] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    0.691903] printk: console [ttyS0] disabled
+[    0.695459] 10000000.uart0: ttyS0 at MMIO 0x10000000 (irq = 30, base_baud = 230400) is a 16550A
+[    0.699082] printk: console [ttyS0] enabled
+[    0.699082] printk: console [ttyS0] enabled
+[    0.700299] printk: bootconsole [sbi0] disabled
+[    0.700299] printk: bootconsole [sbi0] disabled
+[    0.704728] 10001000.uart1: ttyS1 at MMIO 0x10001000 (irq = 31, base_baud = 230400) is a 16550A
+[    0.708112] SuperH (H)SCI(F) driver initialized
+[    0.719264] panel-simple panel: Specify missing bus_flags
+[    0.719524] panel-simple panel: Specify missing bus_format
+[    0.720421] panel-simple panel: Expected bpc in {6,8} but got: 0
+[    0.729480] drm-clcd-pl111 10013000.lcdc: found panel on endpoint 0
+[    0.750298] [drm] Initialized pl111 1.0.0 20170317 for 10013000.lcdc on minor 0
+[    0.828777] Console: switching to colour frame buffer device 80x30
+[    0.845067] drm-clcd-pl111 10013000.lcdc: [drm] fb0: pl111drmfb frame buffer device
+[    0.875907] loop: module loaded
+[    0.877217] virtio_blk virtio0: 1/0/0 default/read/poll queues
+[    0.881238] virtio_blk virtio0: [vda] 722944 512-byte logical blocks (370 MB/353 MiB)
+[    0.895898]  vda: vda1 vda2
+[    0.906214] at24 0-0050: 8192 byte 24c64 EEPROM, writable, 1 bytes/write
+[    0.910156] physmap-flash 20000000.pflash: physmap platform flash device: [mem 0x20000000-0x21ffffff]
+[    0.914058] 20000000.pflash: Found 2 x16 devices at 0x0 in 32-bit bank. Manufacturer ID 0x000000 Chip ID 0x000000
+[    0.915411] Intel/Sharp Extended Query Table at 0x0031
+[    0.917390] Using buffer write method
+[    0.928978] Muxed OneNAND(DDP) 256MB 1.8V 16-bit (0x48)
+[    0.929316] OneNAND version = 0x0000
+[    0.931154] Scanning device for bad blocks
+[    0.999307] sifive_spi 10007000.spi: mapped; irq=35, cs=1
+[    1.023956] spi-nor spi0.0: mx25l25635e (32768 Kbytes)
+[    1.027073] 2 fixed-partitions partitions found on MTD device spi0.0
+[    1.027357] Creating 2 MTD partitions on "spi0.0":
+[    1.027712] 0x000000000000-0x000000c00000 : "spi0_0_fw_image"
+[    1.032989] 0x000000c00000-0x000002000000 : "spi0_0_user"
+[    1.038133] sifive_spi 10008000.spi: mapped; irq=36, cs=1
+[    1.043020] CAN device driver interface
+[    1.048030] macb 10010000.ethernet: Registered clk switch 'sifive-gemgxl-mgmt'
+[    1.055779] macb 10010000.ethernet eth0: Cadence GEM rev 0x10070109 at 0x10010000 irq 38 (52:54:00:12:34:55)
+[    1.068436] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    1.069334] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 1
+[    1.072680] xhci-hcd xhci-hcd.0.auto: hcc params 0x00087001 hci version 0x100 quirks 0x0000000000010010
+[    1.073241] xhci-hcd xhci-hcd.0.auto: irq 39, io mem 0x11000000
+[    1.075334] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    1.075605] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 2
+[    1.076027] xhci-hcd xhci-hcd.0.auto: Host supports USB 3.0 SuperSpeed
+[    1.083043] hub 1-0:1.0: USB hub found
+[    1.083860] hub 1-0:1.0: 4 ports detected
+[    1.087616] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    1.089710] hub 2-0:1.0: USB hub found
+[    1.090100] hub 2-0:1.0: 4 ports detected
+[    1.095244] usbcore: registered new interface driver uas
+[    1.095823] usbcore: registered new interface driver usb-storage
+[    1.096472] usbcore: registered new interface driver ftdi_sio
+[    1.096884] usbserial: USB Serial support registered for FTDI USB Serial Device
+[    1.099726] mousedev: PS/2 mouse device common for all mice
+[    1.102981] goldfish_rtc 10003000.rtc: registered as rtc0
+[    1.103875] goldfish_rtc 10003000.rtc: setting system clock to 2026-11-04T02:50:46 UTC (1793760646)
+[    1.104920] i2c_dev: i2c /dev entries driver
+[    1.113510] sdhci: Secure Digital Host Controller Interface driver
+[    1.113990] sdhci: Copyright(c) Pierre Ossman
+[    1.114309] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.117999] clocksource: ttc_clocksource: mask: 0xffff max_cycles: 0xffff, max_idle_ns: 2488741680 ns
+[    1.119202] timer #0 at (____ptrval____), irq=44
+[    1.120672] usbcore: registered new interface driver usbhid
+[    1.121003] usbhid: USB HID core driver
+[    1.132704] riscv-pmu-sbi: SBI PMU extension is available
+[    1.133434] riscv-pmu-sbi: 16 firmware and 18 hardware counters
+[    1.133694] riscv-pmu-sbi: Perf sampling/filtering is not supported as sscof extension is not available
+[    1.143893] quard,quard-star-i2s 1000b000.i2s: ASoC: error - multiple DAI 1000b000.i2s registered with no name
+[    1.144284] quard,quard-star-i2s 1000b000.i2s: ASoC: Failed to register DAIs: -12
+[    1.144946] quard,quard-star-i2s: probe of 1000b000.i2s failed with error -12
+[    1.148976] NET: Registered PF_INET6 protocol family
+[    1.157571] Segment Routing with IPv6
+[    1.158019] In-situ OAM (IOAM) with IPv6
+[    1.158802] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    1.158997] mmc0: SDHCI controller on 1000a000.sdmmc [1000a000.sdmmc] using ADMA
+[    1.162519] NET: Registered PF_PACKET protocol family
+[    1.162942] can: controller area network core
+[    1.163743] NET: Registered PF_CAN protocol family
+[    1.164014] can: raw protocol
+[    1.164429] can: broadcast manager protocol
+[    1.164862] can: netlink gateway - max_hops=1
+[    1.166477] 9pnet: Installing 9P2000 support
+[    1.167515] Key type dns_resolver registered
+[    1.176868] debug_vm_pgtable: [debug_vm_pgtable         ]: Validating architecture page table helpers
+[    1.179169] mmc0: new high speed SD card at address 4567
+[    1.183350] mmcblk0: mmc0:4567 QEMU! 32.0 MiB 
+[    1.214236] ALSA device list:
+[    1.214471]   No soundcards found.
+[    1.249159] EXT4-fs (vda2): mounted filesystem with ordered data mode. Quota mode: disabled.
+[    1.249820] VFS: Mounted root (ext4 filesystem) on device 254:2.
+[    1.252699] devtmpfs: mounted
+[    1.285527] Freeing unused kernel image (initmem) memory: 388K
+[    1.285774] Kernel memory protection not selected by kernel config.
+[    1.286062] Run /sbin/init as init process
+
+[INIT] proc/sys/dev ready; starting bsp_demo
+[BSP_DEMO] started mode=autostart
+[BSP_DEMO] machine=riscv64 kernel=6.1.11 uptime=1.80 seconds
+[INIT] initialization complete
+
+Please press Enter to activate this console. [   11.334078] platform sound: deferred probe pending
+
+uname -m
+uname -r
+cat /proc/cmdline
+cat /proc/sys/kernel/printk
+/usr/bin/bsp_demo manual
+ps
+cat /proc/device-tree/model; echo
+quard-star# uname -m
+riscv64
+quard-star# uname -r
+6.1.11
+quard-star# cat /proc/cmdline
+root=/dev/vda2 rw console=ttyS0 earlycon=sbi loglevel=7
+quard-star# cat /proc/sys/kernel/printk
+7	4	1	7
+quard-star# /usr/bin/bsp_demo manual
+[BSP_DEMO] started mode=manual
+[BSP_DEMO] machine=riscv64 kernel=6.1.11 uptime=13.41 seconds
+quard-star# ps
+PID   USER     TIME  COMMAND
+    1 root      0:01 init
+    2 root      0:00 [kthreadd]
+    3 root      0:00 [rcu_gp]
+    4 root      0:00 [rcu_par_gp]
+    5 root      0:00 [slub_flushwq]
+    6 root      0:00 [netns]
+    7 root      0:00 [kworker/0:0-rcu]
+    8 root      0:00 [kworker/0:0H-ev]
+    9 root      0:00 [kworker/u14:0-e]
+   10 root      0:00 [mm_percpu_wq]
+   11 root      0:00 [rcu_tasks_kthre]
+   12 root      0:00 [rcu_tasks_trace]
+   13 root      0:00 [ksoftirqd/0]
+   14 root      0:00 [rcu_preempt]
+   15 root      0:00 [migration/0]
+   16 root      0:00 [kworker/0:1-rcu]
+   17 root      0:00 [cpuhp/0]
+   18 root      0:00 [cpuhp/1]
+   19 root      0:00 [migration/1]
+   20 root      0:00 [ksoftirqd/1]
+   21 root      0:00 [kworker/1:0-eve]
+   22 root      0:00 [kworker/1:0H-kb]
+   23 root      0:00 [cpuhp/2]
+   24 root      0:00 [migration/2]
+   25 root      0:00 [ksoftirqd/2]
+   26 root      0:00 [kworker/2:0-rcu]
+   27 root      0:00 [kworker/2:0H-kb]
+   28 root      0:00 [cpuhp/3]
+   29 root      0:00 [migration/3]
+   30 root      0:00 [ksoftirqd/3]
+   31 root      0:00 [kworker/3:0-mm_]
+   32 root      0:00 [kworker/3:0H-kb]
+   33 root      0:00 [cpuhp/4]
+   34 root      0:00 [migration/4]
+   35 root      0:00 [ksoftirqd/4]
+   36 root      0:00 [kworker/4:0-rcu]
+   37 root      0:00 [kworker/4:0H-kb]
+   38 root      0:00 [cpuhp/5]
+   39 root      0:00 [migration/5]
+   40 root      0:00 [ksoftirqd/5]
+   41 root      0:00 [kworker/5:0-eve]
+   42 root      0:00 [kworker/5:0H]
+   43 root      0:00 [cpuhp/6]
+   44 root      0:00 [migration/6]
+   45 root      0:00 [ksoftirqd/6]
+   46 root      0:00 [kworker/6:0-rcu]
+   47 root      0:00 [kworker/6:0H-ev]
+   48 root      0:00 [kdevtmpfs]
+   49 root      0:00 [inet_frag_wq]
+   50 root      0:00 [kauditd]
+   51 root      0:00 [khungtaskd]
+   52 root      0:00 [oom_reaper]
+   53 root      0:00 [writeback]
+   54 root      0:00 [kcompactd0]
+   55 root      0:00 [kblockd]
+   56 root      0:00 [ata_sff]
+   57 root      0:00 [kworker/0:2-eve]
+   58 root      0:00 [watchdogd]
+   59 root      0:00 [kworker/2:1-mm_]
+   60 root      0:00 [kworker/0:1H-kb]
+   61 root      0:00 [rpciod]
+   62 root      0:00 [xprtiod]
+   63 root      0:00 [kworker/u14:1-e]
+   64 root      0:00 [kswapd0]
+   65 root      0:00 [nfsiod]
+   71 root      0:00 [khvcd]
+   72 root      0:00 [kworker/2:2]
+   73 root      0:00 [card0-crtc0]
+   74 root      0:00 [kworker/4:1-eve]
+   75 root      0:00 [kworker/4:2]
+   76 root      0:00 [kworker/1:1-eve]
+   77 root      0:00 [kworker/1:1H-kb]
+   80 root      0:00 [kworker/3:1-mm_]
+   81 root      0:00 [kworker/6:1-eve]
+   83 root      0:00 [spi0]
+   85 root      0:00 [spi1]
+   87 root      0:00 [uas]
+   88 root      0:00 [kworker/u15:0]
+   89 root      0:00 [sdhci]
+   90 root      0:00 [irq/43-mmc0]
+   91 root      0:00 [kworker/6:2-eve]
+   92 root      0:00 [mld]
+   93 root      0:00 [kworker/6:1H-kb]
+   94 root      0:00 [ipv6_addrconf]
+   95 root      0:00 [mmc_complete]
+  115 root      0:00 [kworker/4:1H-kb]
+  116 root      0:00 [jbd2/vda2-8]
+  117 root      0:00 [ext4-rsv-conver]
+  127 root      0:00 [kworker/5:1-eve]
+  129 root      0:00 [kworker/2:1H]
+  130 root      0:00 -/bin/sh
+  131 root      0:00 [kworker/u14:2-e]
+  132 root      0:00 [kworker/3:1H-kb]
+  138 root      0:00 ps
+quard-star# cat /proc/device-tree/model; echo
+riscv-quard-star,qemu\0
+quard-star# sync
+quard-star# poweroff
+quard-star# umount: devtmpfs busy - remounted read-only
+[   20.572354] EXT4-fs (vda2): re-mounted. Quota mode: disabled.
+The system is going down NOW!
+Sent SIGTERM to all processes
+Sent SIGKILL to all processes
+Requesting system poweroff
+[   22.598709] kvm: exiting hardware virtualization
+[   22.613607] Flash device refused suspend due to active operation (state 20)
+[   22.614321] reboot: Power down

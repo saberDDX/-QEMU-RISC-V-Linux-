@@ -1,0 +1,3 @@
+Kernel: GCC 11.1 Linux toolchain; CONFIG_FTRACE=n; CONFIG_GCC_PLUGINS=n
+BusyBox: CONFIG_TC=n
+U-Boot: source configuration retained; source bitmap copied into out-of-tree build.

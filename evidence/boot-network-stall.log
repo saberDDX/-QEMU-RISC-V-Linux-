@@ -1,0 +1,251 @@
+qemu-system-riscv64: warning: nic cadence_gem.0 has no peer
+Quard Star MaskRom v0.1
+SD_BOOT
+Load lowlevelboot.bin
+Load address: 0x20000
+Loading: ################################################################ 256KiB
+Quard Star LowLevelBoot
+In SD BOOT...
+Load opensbi_fw.bin
+Load address: 0xbff80000
+Loading: ################################################################ 512KiB
+Load qemu_sbi.dtb
+Load address: 0xbff00000
+Loading: ################################################################ 512KiB
+Load trusted_fw.bin
+Load address: 0xbf800000
+Loading: ################################################################ 4MiB
+Load qemu_uboot.dtb
+Load address: 0xb0000000
+Loading: ################################################################ 512KiB
+Load u-boot.bin
+Load address: 0xb0200000
+Loading: ################################################################ 4MiB
+
+OpenSBI v1.2
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name             : riscv-quard-star,qemu
+Platform Features         : medeleg
+Platform HART Count       : 8
+Platform IPI Device       : aclint-mswi
+Platform Timer Device     : aclint-mtimer @ 10000000Hz
+Platform Console Device   : uart8250
+Platform HSM Device       : ---
+Platform PMU Device       : ---
+Platform Reboot Device    : sifive_test
+Platform Shutdown Device  : sifive_test
+Firmware Base             : 0xbff80000
+Firmware Size             : 304 KB
+Runtime SBI Version       : 1.0
+
+Domain0 Name              : root
+Domain0 Boot HART         : 0
+Domain0 HARTs             : 0,1,2,3,4,5,6,7
+Domain0 Region00          : 0x0000000002000000-0x000000000200ffff (I)
+Domain0 Region01          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain0 Region02          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain0 Next Address      : 0x0000000000000000
+Domain0 Next Arg1         : 0x00000000bff00000
+Domain0 Next Mode         : S-mode
+Domain0 SysReset          : yes
+
+Domain1 Name              : trusted-domain
+Domain1 Boot HART         : 7
+Domain1 HARTs             : 7*
+Domain1 Region00          : 0x0000000010002000-0x00000000100020ff (I,R,W,X)
+Domain1 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain1 Region02          : 0x00000000bff00000-0x00000000bff7ffff (R,W,X)
+Domain1 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain1 Region04          : 0x00000000bfe00000-0x00000000bfefffff (R,W,X)
+Domain1 Region05          : 0x00000000bfc00000-0x00000000bfdfffff (R,W,X)
+Domain1 Region06          : 0x00000000bf800000-0x00000000bfbfffff (R,W,X)
+Domain1 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain1 Next Address      : 0x00000000bf800000
+Domain1 Next Arg1         : 0x0000000000000000
+Domain1 Next Mode         : S-mode
+Domain1 SysReset          : yes
+
+Domain2 Name              : untrusted-domain
+Domain2 Boot HART         : 0
+Domain2 HARTs             : 0*,1*,2*,3*,4*,5*,6*
+Domain2 Region00          : 0x0000000010002000-0x00000000100020ff (I)
+Domain2 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain2 Region02          : 0x00000000bff00000-0x00000000bff7ffff ()
+Domain2 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain2 Region04          : 0x00000000bfe00000-0x00000000bfefffff ()
+Domain2 Region05          : 0x00000000bfc00000-0x00000000bfdfffff ()
+Domain2 Region06          : 0x00000000bf800000-0x00000000bfbfffff ()
+Domain2 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain2 Next Address      : 0x00000000b0200000
+Domain2 Next Arg1         : 0x00000000b0000000
+Domain2 Next Mode         : S-mode
+Domain2 SysReset          : yes
+
+Boot HART ID              : 0
+Boot HART Domain          : untrusted-domain
+Boot HART Priv Version    : v1.12
+Boot HART Base ISA        : rv64imafdch
+Boot HART ISA Extensions  : time,sstc
+Boot HART PMP Count       : 16
+Boot HART PMP Granularity : 4
+Boot HART PMP Address Bits: 54
+Boot HART MHPM Count      : 16
+Boot HART MIDELEG         : 0x0000000000001666
+Boot HART MEDELEG         : 0x0000000000f0b509
+
+
+U-Boot 2023.04 (Nov 04 2026 - 02:24:37 +0000)
+
+CPU:   rv64imafdchsu
+Model: riscv-quard-star,qemu
+DRAM:  1016 MiB
+Core:  60 devices, 23 uclasses, devicetree: separate
+Flash: 16 MiB
+NAND:  Muxed OneNAND(DDP) 256MB 1.8V 16-bit (0x48)
+OneNAND version = 0x0000
+Chip support all block unlock
+Scanning device for bad blocks
+OneNAND: 256 MiB
+MMC:   sdmmc@1000a000: 0
+Loading Environment from nowhere... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@10010000
+Hit any key to stop autoboot:  2  1  0 
+
+Device 0: QEMU VirtIO Block Device
+            Type: Hard Disk
+            Capacity: 353.0 MB = 0.3 GB (722944 x 512)
+... is now current device
+Scanning virtio 0:1...
+Found U-Boot script /boot.scr
+340 bytes read in 7 ms (46.9 KiB/s)
+## Executing script at 82700000
+Quard Star BSP: loading kernel and device tree from virtio disk
+14017 bytes read in 17 ms (804.7 KiB/s)
+13988352 bytes read in 16 ms (833.8 MiB/s)
+Moving Image from 0x80000000 to 0x80200000, end=80fd6000
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+Working FDT set to 82000000
+   Using Device Tree in place at 0000000082000000, end 00000000820066c0
+Working FDT set to 82000000
+
+Starting kernel ...
+
+[    0.000000] Linux version 6.1.11 (agent@d53d49725e6d) (riscv64-linux-gnu-gcc (Debian 14.2.0-19) 14.2.0, GNU ld (GNU Binutils for Debian) 2.44) #2 SMP PREEMPT Wed Nov  4 02:34:14 UTC 2026
+[    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000
+[    0.000000] Machine model: riscv-quard-star,qemu
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: bootconsole [sbi0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] cma: Reserved 16 MiB at 0x00000000be800000
+[    0.000000] Reserved memory: created DMA memory pool at 0x00000000b0000000, size 248 MiB
+[    0.000000] OF: reserved mem: initialized node linux,cma@b0000000, compatible id shared-dma-pool
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000] SBI specification v1.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10002
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI HSM extension detected
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] riscv: base ISA extensions acdfhim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 18 pages/cpu s36024 r8192 d29512 u73728
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 255528
+[    0.000000] Kernel command line: root=/dev/vda2 rw console=ttyS0 earlycon=sbi loglevel=7
+[    0.000000] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] mem auto-init: stack:all(pattern), heap alloc:off, heap free:off
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]       fixmap : 0xff1bfffffee00000 - 0xff1bffffff000000   (2048 kB)
+[    0.000000]       pci io : 0xff1bffffff000000 - 0xff1c000000000000   (  16 MB)
+[    0.000000]      vmemmap : 0xff1c000000000000 - 0xff20000000000000   (1024 TB)
+[    0.000000]      vmalloc : 0xff20000000000000 - 0xff60000000000000   (16384 TB)
+[    0.000000]      modules : 0xffffffff00dd6000 - 0xffffffff80000000   (2034 MB)
+[    0.000000]       lowmem : 0xff60000000000000 - 0xff6000003f600000   (1014 MB)
+[    0.000000]       kernel : 0xffffffff80000000 - 0xffffffffffffffff   (2047 MB)
+[    0.000000] Memory: 751896K/1038336K available (9315K kernel code, 1008K rwdata, 2933K rodata, 395K init, 503K bss, 270056K reserved, 16384K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=7, Nodes=1
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=7.
+[    0.000000] rcu: 	RCU debug extended QS entry/exit.
+[    0.000000] 	Trampoline variant of Tasks RCU enabled.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=7
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 64 local interrupts mapped
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] riscv-intc: unable to find hart id for /cpus/cpu@7/interrupt-controller
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] plic: failed to parse hart ID for context 15.
+[    0.000000] plic: plic@c000000: mapped 64 interrupts with 7 handlers for 16 contexts.
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] riscv-timer: riscv_timer_init_dt: Registering clocksource cpuid [0] hartid [0]
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x24e6a1710, max_idle_ns: 440795202120 ns
+[    0.000079] sched_clock: 64 bits at 10MHz, resolution 100ns, wraps every 4398046511100ns
+[    0.023062] Console: colour dummy device 80x25
+[    0.028035] Calibrating delay loop (skipped), value calculated using timer frequency.. 20.00 BogoMIPS (lpj=40000)
+[    0.029399] pid_max: default: 32768 minimum: 301
+[    0.031372] LSM: Security Framework initializing
+[    0.035105] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.036386] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.076260] /cpus/cpu-map/cluster1: empty cluster
+[    0.109351] cblist_init_generic: Setting adjustable number of callback queues.
+[    0.111686] cblist_init_generic: Setting shift to 3 and lim to 1.
+[    0.113230] cblist_init_generic: Setting shift to 3 and lim to 1.
+[    0.114975] riscv: ELF compat mode supported
+[    0.115540] ASID allocator using 16 bits (65536 entries)
+[    0.119559] rcu: Hierarchical SRCU implementation.
+[    0.120223] rcu: 	Max phase no-delay instances is 1000.
+[    0.125460] EFI services will not be available.
+[    0.129611] smp: Bringing up secondary CPUs ...
+[    0.159684] smp: Brought up 1 node, 7 CPUs
+[    0.171043] devtmpfs: initialized
+[    0.181052] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.181974] futex hash table entries: 2048 (order: 5, 131072 bytes, linear)
+[    0.193553] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.201555] DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+[    0.202281] DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.203630] audit: initializing netlink subsys (disabled)
+[    0.206003] audit: type=2000 audit(0.152:1): state=initialized audit_enabled=0 res=1
+[    0.208453] cpuidle: using governor menu
+[    0.230644] platform panel: Fixing up cyclic dependency with 10013000.lcdc
+[    0.252087] HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.252345] HugeTLB: 0 KiB vmemmap can be freed for a 1.00 GiB page
+[    0.252850] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.253423] HugeTLB: 0 KiB vmemmap can be freed for a 2.00 MiB page
+[    0.267356] SCSI subsystem initialized
+[    0.269624] usbcore: registered new interface driver usbfs
+[    0.270188] usbcore: registered new interface driver hub
+[    0.270567] usbcore: registered new device driver usb
+[    0.274423] i2c i2c-0: IMX I2C adapter registered
+[    0.278621] i2c 1-001a: Fixing up cyclic dependency with 1000b000.i2s
+[    0.279126] i2c i2c-1: IMX I2C adapter registered
+[    0.280285] i2c i2c-2: IMX I2C adapter registered
+[    0.281952] Advanced Linux Sound Architecture Driver Initialized.
+[    0.295372] vgaarb: loaded
+[    0.315985] clocksource: Switched to clocksource riscv_clocksource
+[    0.350839] NET: Registered PF_INET protocol family
+[    0.352502] IP idents hash table entries: 16384 (order: 5, 131072 bytes, linear)
+qemu-system-riscv64: terminating on signal 15 from pid 187725 (/bin/bash)

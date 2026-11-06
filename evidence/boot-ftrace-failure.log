@@ -1,0 +1,221 @@
+qemu-system-riscv64: warning: nic cadence_gem.0 has no peer
+Quard Star MaskRom v0.1
+SD_BOOT
+Load lowlevelboot.bin
+Load address: 0x20000
+Loading: ################################################################ 256KiB
+Quard Star LowLevelBoot
+In SD BOOT...
+Load opensbi_fw.bin
+Load address: 0xbff80000
+Loading: ################################################################ 512KiB
+Load qemu_sbi.dtb
+Load address: 0xbff00000
+Loading: ################################################################ 512KiB
+Load trusted_fw.bin
+Load address: 0xbf800000
+Loading: ################################################################ 4MiB
+Load qemu_uboot.dtb
+Load address: 0xb0000000
+Loading: ################################################################ 512KiB
+Load u-boot.bin
+Load address: 0xb0200000
+Loading: ################################################################ 4MiB
+
+OpenSBI v1.2
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name             : riscv-quard-star,qemu
+Platform Features         : medeleg
+Platform HART Count       : 8
+Platform IPI Device       : aclint-mswi
+Platform Timer Device     : aclint-mtimer @ 10000000Hz
+Platform Console Device   : uart8250
+Platform HSM Device       : ---
+Platform PMU Device       : ---
+Platform Reboot Device    : sifive_test
+Platform Shutdown Device  : sifive_test
+Firmware Base             : 0xbff80000
+Firmware Size             : 304 KB
+Runtime SBI Version       : 1.0
+
+Domain0 Name              : root
+Domain0 Boot HART         : 0
+Domain0 HARTs             : 0,1,2,3,4,5,6,7
+Domain0 Region00          : 0x0000000002000000-0x000000000200ffff (I)
+Domain0 Region01          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain0 Region02          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain0 Next Address      : 0x0000000000000000
+Domain0 Next Arg1         : 0x00000000bff00000
+Domain0 Next Mode         : S-mode
+Domain0 SysReset          : yes
+
+Domain1 Name              : trusted-domain
+Domain1 Boot HART         : 7
+Domain1 HARTs             : 7*
+Domain1 Region00          : 0x0000000010002000-0x00000000100020ff (I,R,W,X)
+Domain1 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain1 Region02          : 0x00000000bff00000-0x00000000bff7ffff (R,W,X)
+Domain1 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain1 Region04          : 0x00000000bfe00000-0x00000000bfefffff (R,W,X)
+Domain1 Region05          : 0x00000000bfc00000-0x00000000bfdfffff (R,W,X)
+Domain1 Region06          : 0x00000000bf800000-0x00000000bfbfffff (R,W,X)
+Domain1 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain1 Next Address      : 0x00000000bf800000
+Domain1 Next Arg1         : 0x0000000000000000
+Domain1 Next Mode         : S-mode
+Domain1 SysReset          : yes
+
+Domain2 Name              : untrusted-domain
+Domain2 Boot HART         : 0
+Domain2 HARTs             : 0*,1*,2*,3*,4*,5*,6*
+Domain2 Region00          : 0x0000000010002000-0x00000000100020ff (I)
+Domain2 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain2 Region02          : 0x00000000bff00000-0x00000000bff7ffff ()
+Domain2 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain2 Region04          : 0x00000000bfe00000-0x00000000bfefffff ()
+Domain2 Region05          : 0x00000000bfc00000-0x00000000bfdfffff ()
+Domain2 Region06          : 0x00000000bf800000-0x00000000bfbfffff ()
+Domain2 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain2 Next Address      : 0x00000000b0200000
+Domain2 Next Arg1         : 0x00000000b0000000
+Domain2 Next Mode         : S-mode
+Domain2 SysReset          : yes
+
+Boot HART ID              : 0
+Boot HART Domain          : untrusted-domain
+Boot HART Priv Version    : v1.12
+Boot HART Base ISA        : rv64imafdch
+Boot HART ISA Extensions  : time,sstc
+Boot HART PMP Count       : 16
+Boot HART PMP Granularity : 4
+Boot HART PMP Address Bits: 54
+Boot HART MHPM Count      : 16
+Boot HART MIDELEG         : 0x0000000000001666
+Boot HART MEDELEG         : 0x0000000000f0b509
+
+
+U-Boot 2023.04 (Nov 04 2026 - 02:24:37 +0000)
+
+CPU:   rv64imafdchsu
+Model: riscv-quard-star,qemu
+DRAM:  1016 MiB
+Core:  60 devices, 23 uclasses, devicetree: separate
+Flash: 16 MiB
+NAND:  Muxed OneNAND(DDP) 256MB 1.8V 16-bit (0x48)
+OneNAND version = 0x0000
+Chip support all block unlock
+Scanning device for bad blocks
+OneNAND: 256 MiB
+MMC:   sdmmc@1000a000: 0
+Loading Environment from nowhere... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@10010000
+Hit any key to stop autoboot:  2  1  0 
+
+Device 0: QEMU VirtIO Block Device
+            Type: Hard Disk
+            Capacity: 353.0 MB = 0.3 GB (722944 x 512)
+... is now current device
+Scanning virtio 0:1...
+Found U-Boot script /boot.scr
+340 bytes read in 9 ms (36.1 KiB/s)
+## Executing script at 82700000
+Quard Star BSP: loading kernel and device tree from virtio disk
+14017 bytes read in 13 ms (1 MiB/s)
+18041856 bytes read in 22 ms (782.1 MiB/s)
+Moving Image from 0x80000000 to 0x80200000, end=813b8000
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+Working FDT set to 82000000
+   Using Device Tree in place at 0000000082000000, end 00000000820066c0
+Working FDT set to 82000000
+
+Starting kernel ...
+
+[    0.000000] Linux version 6.1.11 (agent@d53d49725e6d) (riscv64-linux-gnu-gcc (Debian 14.2.0-19) 14.2.0, GNU ld (GNU Binutils for Debian) 2.44) #1 SMP PREEMPT Tue Nov  3 17:57:26 UTC 2026
+[    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000
+[    0.000000] Machine model: riscv-quard-star,qemu
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: bootconsole [sbi0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] cma: Reserved 16 MiB at 0x00000000be800000
+[    0.000000] Reserved memory: created DMA memory pool at 0x00000000b0000000, size 248 MiB
+[    0.000000] OF: reserved mem: initialized node linux,cma@b0000000, compatible id shared-dma-pool
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080200000-0x00000000bf7fffff]
+[    0.000000] SBI specification v1.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10002
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI HSM extension detected
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] CPU with hartid=7 is not available
+[    0.000000] riscv: base ISA extensions acdfhim
+[    0.000000] riscv: ELF capabilities acdfim
+[    0.000000] percpu: Embedded 27 pages/cpu s73336 r8192 d29064 u110592
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 255528
+[    0.000000] Kernel command line: root=/dev/vda2 rw console=ttyS0 earlycon=sbi loglevel=7
+[    0.000000] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] mem auto-init: stack:all(pattern), heap alloc:off, heap free:off
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]       fixmap : 0xff1bfffffee00000 - 0xff1bffffff000000   (2048 kB)
+[    0.000000]       pci io : 0xff1bffffff000000 - 0xff1c000000000000   (  16 MB)
+[    0.000000]      vmemmap : 0xff1c000000000000 - 0xff20000000000000   (1024 TB)
+[    0.000000]      vmalloc : 0xff20000000000000 - 0xff60000000000000   (16384 TB)
+[    0.000000]      modules : 0xffffffff011b8000 - 0xffffffff80000000   (2030 MB)
+[    0.000000]       lowmem : 0xff60000000000000 - 0xff6000003f600000   (1014 MB)
+[    0.000000]       kernel : 0xffffffff80000000 - 0xffffffffffffffff   (2047 MB)
+[    0.000000] Memory: 747668K/1038336K available (11311K kernel code, 2044K rwdata, 3411K rodata, 843K init, 522K bss, 274284K reserved, 16384K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=7, Nodes=1
+[    0.000000] ftrace: allocating 39697 entries in 156 pages
+[    0.000000] ------------[ ftrace bug ]------------
+[    0.000000] ftrace faulted on writing 
+[    0.000000] [<ffffffff80002000>] _stext+0x0/0x44
+[    0.000000] Initializing ftrace call sites
+[    0.000000] ftrace record flags: 0
+[    0.000000]  (0)  
+[    0.000000]  expected tramp: ffffffff80009c98
+[    0.000000] Kernel BUG [#1]
+[    0.000000] Modules linked in:
+[    0.000000] CPU: 0 PID: 0 Comm: swapper Not tainted 6.1.11 #1
+[    0.000000] Hardware name: riscv-quard-star,qemu (DT)
+[    0.000000] epc : ftrace_bug+0x260/0x294
+[    0.000000]  ra : ftrace_bug+0x260/0x294
+[    0.000000] epc : ffffffff80af512e ra : ffffffff80af512e sp : ffffffff80f3bed0
+[    0.000000]  gp : ffffffff81131be0 tp : ffffffff80f47e80 t0 : ffffffff80f3bcd8
+[    0.000000]  t1 : 0000000000000020 t2 : 7420646574636570 s0 : ffffffff80f3bf00
+[    0.000000]  s1 : ffffffff80002000 a0 : 0000000000000022 a1 : ffffffff80fcf048
+[    0.000000]  a2 : 0000000000000010 a3 : 00000000000000f4 a4 : 0000000000000000
+[    0.000000]  a5 : 0000000000000000 a6 : 0000000000000000 a7 : 0000000000000001
+[    0.000000]  s2 : ff60000001280000 s3 : ffffffffffffffff s4 : 0000000000000000
+[    0.000000]  s5 : 0000000200000100 s6 : ffffffff81135a08 s7 : ff60000001204000
+[    0.000000]  s8 : ffffffff80e9bda8 s9 : ffffffff80bc14b0 s10: 0000000000001000
+[    0.000000]  s11: 0000000000000002 t3 : ffffffff8114772d t4 : ffffffff8114772d
+[    0.000000]  t5 : ffffffff81147730 t6 : ffffffff80f3bcd8
+[    0.000000] status: 0000000200000100 badaddr: 0000000000000000 cause: 0000000000000003
+[    0.000000] [<ffffffff80106f68>] ftrace_process_locs+0x312/0x3d8
+[    0.000000] [<ffffffff80b1e9ec>] ftrace_init+0x8c/0x168
+[    0.000000] [<ffffffff80b0eb3e>] start_kernel+0x49e/0x848
+[    0.000000] ---[ end trace 0000000000000000 ]---
+[    0.000000] Kernel panic - not syncing: Attempted to kill the idle task!
+[    0.000000] ---[ end Kernel panic - not syncing: Attempted to kill the idle task! ]---
+qemu-system-riscv64: terminating on signal 15 from pid 143184 (/bin/bash)

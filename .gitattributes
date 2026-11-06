@@ -1,0 +1,2 @@
+# Preserve captured terminal/tool output without enforcing source whitespace rules.
+evidence/** -whitespace

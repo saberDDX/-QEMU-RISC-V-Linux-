@@ -1,0 +1,7 @@
+x86_64
+riscv64-linux-gnu-gcc (Debian 14.2.0-19) 14.2.0
+riscv64-unknown-elf-gcc (GCC) 11.1.0
+QEMU emulator version 8.0.0
+quard-star           RISC-V Quard Star board
+riscv64-unknown-linux-gnu-gcc (GCC) 11.1.0
+GNU ld (GNU Binutils) 2.36.1

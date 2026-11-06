@@ -1,0 +1,193 @@
+qemu-system-riscv64: warning: nic cadence_gem.0 has no peer
+Quard Star MaskRom v0.1
+SD_BOOT
+Load lowlevelboot.bin
+Load address: 0x20000
+Loading: ################################################################ 256KiB
+Quard Star LowLevelBoot
+In SD BOOT...
+Load opensbi_fw.bin
+Load address: 0xbff80000
+Loading: ################################################################ 512KiB
+Load qemu_sbi.dtb
+Load address: 0xbff00000
+Loading: ################################################################ 512KiB
+Load trusted_fw.bin
+Load address: 0xbf800000
+Loading: ################################################################ 4MiB
+Load qemu_uboot.dtb
+Load address: 0xb0000000
+Loading: ################################################################ 512KiB
+Load u-boot.bin
+Load address: 0xb0200000
+Loading: ################################################################ 4MiB
+
+OpenSBI v1.2
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name             : riscv-quard-star,qemu
+Platform Features         : medeleg
+Platform HART Count       : 8
+Platform IPI Device       : aclint-mswi
+Platform Timer Device     : aclint-mtimer @ 10000000Hz
+Platform Console Device   : uart8250
+Platform HSM Device       : ---
+Platform PMU Device       : ---
+Platform Reboot Device    : sifive_test
+Platform Shutdown Device  : sifive_test
+Firmware Base             : 0xbff80000
+Firmware Size             : 304 KB
+Runtime SBI Version       : 1.0
+
+Domain0 Name              : root
+Domain0 Boot HART         : 0
+Domain0 HARTs             : 0,1,2,3,4,5,6,7
+Domain0 Region00          : 0x0000000002000000-0x000000000200ffff (I)
+Domain0 Region01          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain0 Region02          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain0 Next Address      : 0x0000000000000000
+Domain0 Next Arg1         : 0x00000000bff00000
+Domain0 Next Mode         : S-mode
+Domain0 SysReset          : yes
+
+Domain1 Name              : trusted-domain
+Domain1 Boot HART         : 7
+Domain1 HARTs             : 7*
+Domain1 Region00          : 0x0000000010002000-0x00000000100020ff (I,R,W,X)
+Domain1 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain1 Region02          : 0x00000000bff00000-0x00000000bff7ffff (R,W,X)
+Domain1 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain1 Region04          : 0x00000000bfe00000-0x00000000bfefffff (R,W,X)
+Domain1 Region05          : 0x00000000bfc00000-0x00000000bfdfffff (R,W,X)
+Domain1 Region06          : 0x00000000bf800000-0x00000000bfbfffff (R,W,X)
+Domain1 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain1 Next Address      : 0x00000000bf800000
+Domain1 Next Arg1         : 0x0000000000000000
+Domain1 Next Mode         : S-mode
+Domain1 SysReset          : yes
+
+Domain2 Name              : untrusted-domain
+Domain2 Boot HART         : 0
+Domain2 HARTs             : 0*,1*,2*,3*,4*,5*,6*
+Domain2 Region00          : 0x0000000010002000-0x00000000100020ff (I)
+Domain2 Region01          : 0x0000000002000000-0x000000000200ffff (I)
+Domain2 Region02          : 0x00000000bff00000-0x00000000bff7ffff ()
+Domain2 Region03          : 0x00000000bff80000-0x00000000bfffffff ()
+Domain2 Region04          : 0x00000000bfe00000-0x00000000bfefffff ()
+Domain2 Region05          : 0x00000000bfc00000-0x00000000bfdfffff ()
+Domain2 Region06          : 0x00000000bf800000-0x00000000bfbfffff ()
+Domain2 Region07          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
+Domain2 Next Address      : 0x00000000b0200000
+Domain2 Next Arg1         : 0x00000000b0000000
+Domain2 Next Mode         : S-mode
+Domain2 SysReset          : yes
+
+Boot HART ID              : 0
+Boot HART Domain          : untrusted-domain
+Boot HART Priv Version    : v1.12
+Boot HART Base ISA        : rv64imafdch
+Boot HART ISA Extensions  : time,sstc
+Boot HART PMP Count       : 16
+Boot HART PMP Granularity : 4
+Boot HART PMP Address Bits: 54
+Boot HART MHPM Count      : 16
+Boot HART MIDELEG         : 0x0000000000001666
+Boot HART MEDELEG         : 0x0000000000f0b509
+
+
+U-Boot 2023.04 (Nov 04 2026 - 02:24:37 +0000)
+
+CPU:   rv64imafdchsu
+Model: riscv-quard-star,qemu
+DRAM:  1016 MiB
+Core:  60 devices, 23 uclasses, devicetree: separate
+Flash: 16 MiB
+NAND:  Muxed OneNAND(DDP) 256MB 1.8V 16-bit (0x48)
+OneNAND version = 0x0000
+Chip support all block unlock
+Scanning device for bad blocks
+OneNAND: 256 MiB
+MMC:   sdmmc@1000a000: 0
+Loading Environment from nowhere... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@10010000
+Hit any key to stop autoboot:  2  1  0 
+
+Device 0: QEMU VirtIO Block Device
+            Type: Hard Disk
+            Capacity: 353.0 MB = 0.3 GB (722944 x 512)
+... is now current device
+Scanning virtio 0:1...
+Found U-Boot script /boot.scr
+340 bytes read in 8 ms (41 KiB/s)
+## Executing script at 82700000
+Quard Star BSP: loading kernel and device tree from virtio disk
+14017 bytes read in 11 ms (1.2 MiB/s)
+13626368 bytes read in 18 ms (722 MiB/s)
+Moving Image from 0x80000000 to 0x80200000, end=80f7d000
+## Flattened Device Tree blob at 82000000
+   Booting using the fdt blob at 0x82000000
+Working FDT set to 82000000
+   Using Device Tree in place at 0000000082000000, end 00000000820066c0
+Working FDT set to 82000000
+
+Starting kernel ...
+
+[    0.000000] Linux version 6.1.11 (agent@d53d49725e6d) (riscv64-unknown-linux-gnu-gcc (GCC) 11.1.0, GNU ld (GNU Binutils) 2.36.1) #3 SMP PREEMPT Wed Nov  4 02:49:25 UTC 2026
+[    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000
+[    0.000000] Machine model: riscv-quard-star,qemu
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: bootconsole [sbi0] enabled
+[    0.936712] quard,quard-star-i2s 1000b000.i2s: ASoC: error - multiple DAI 1000b000.i2s registered with no name
+[    0.937438] quard,quard-star-i2s 1000b000.i2s: ASoC: Failed to register DAIs: -12
+
+[INIT] proc/sys/dev ready; starting bsp_demo
+[BSP_DEMO] started mode=autostart
+[BSP_DEMO] machine=riscv64 kernel=6.1.11 uptime=1.67 seconds
+[INIT] initialization complete
+
+Please press Enter to activate this console. 
+uname -m
+uname -r
+cat /proc/cmdline
+cat /proc/sys/kernel/printk
+/usr/bin/bsp_demo manual
+ps | head -4
+cat /proc/device-tree/model; echo
+sync
+poweroff
+quard-star# uname -m
+riscv64
+quard-star# uname -r
+6.1.11
+quard-star# cat /proc/cmdline
+root=/dev/vda2 rw console=ttyS0 earlycon=sbi loglevel=4
+quard-star# cat /proc/sys/kernel/printk
+4	4	1	7
+quard-star# /usr/bin/bsp_demo manual
+[BSP_DEMO] started mode=manual
+[BSP_DEMO] machine=riscv64 kernel=6.1.11 uptime=30.00 seconds
+quard-star# ps | head -4
+PID   USER     TIME  COMMAND
+    1 root      0:00 init
+    2 root      0:00 [kthreadd]
+    3 root      0:00 [rcu_gp]
+quard-star# cat /proc/device-tree/model; echo
+riscv-quard-star,qemu\0
+quard-star# sync
+quard-star# poweroff
+quard-star# umount: devtmpfs busy - remounted read-only
+The system is going down NOW!
+Sent SIGTERM to all processes
+Sent SIGKILL to all processes
+Requesting system poweroff
+[   32.622090] reboot: Power down

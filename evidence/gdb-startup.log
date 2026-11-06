@@ -1,0 +1,91 @@
+Reading symbols from /workspace/-QEMU-RISC-V-Linux-/output/build/linux/vmlinux...
+Remote debugging using 127.0.0.1:1234
+0x0000000000000000 in ?? ()
+(gdb) hbreak start_kernel
+Hardware assisted breakpoint 1 at 0xffffffff808bc058: file /workspace/quard-star-upstream/linux-6.1.11/init/main.c, line 937.
+(gdb) continue
+Continuing.
+
+Thread 1 hit Breakpoint 1, start_kernel ()
+    at /workspace/quard-star-upstream/linux-6.1.11/init/main.c:937
+937	{
+(gdb) info registers pc sp
+pc             0xffffffff808bc058	0xffffffff808bc058 <start_kernel>
+sp             0xffffffff80c0c000	0xffffffff80c0c000 <vdso_data_store>
+(gdb) bt
+#0  start_kernel ()
+    at /workspace/quard-star-upstream/linux-6.1.11/init/main.c:937
+#1  0xffffffff80001164 in _start_kernel ()
+    at /workspace/quard-star-upstream/linux-6.1.11/arch/riscv/kernel/head.S:326
+Backtrace stopped: frame did not save the PC
+(gdb) list 937,953
+937	{
+938		char *command_line;
+939		char *after_dashes;
+940	
+941		set_task_stack_end_magic(&init_task);
+942		smp_setup_processor_id();
+943		debug_objects_early_init();
+944		init_vmlinux_build_id();
+945	
+946		cgroup_init_early();
+947	
+948		local_irq_disable();
+949		early_boot_irqs_disabled = true;
+950	
+951		/*
+952		 * Interrupts are still disabled. Do necessary setups, then
+953		 * enable them.
+(gdb) next
+941		set_task_stack_end_magic(&init_task);
+(gdb) print init_task.comm
+$1 = "swapper\000\000\000\000\000\000\000\000"
+(gdb) hbreak run_init_process
+Hardware assisted breakpoint 2 at 0xffffffff808a504a: file /workspace/quard-star-upstream/linux-6.1.11/init/main.c, line 1427.
+(gdb) continue
+Continuing.
+[Switching to Thread 1.6]
+
+Thread 6 hit Breakpoint 2, run_init_process (
+    init_filename=init_filename@entry=0xffffffff80abebc0 "/sbin/init")
+    at /workspace/quard-star-upstream/linux-6.1.11/init/main.c:1427
+1427		argv_init[0] = init_filename;
+(gdb) print init_filename
+$2 = 0xffffffff80abebc0 "/sbin/init"
+(gdb) bt
+#0  run_init_process (
+    init_filename=init_filename@entry=0xffffffff80abebc0 "/sbin/init")
+    at /workspace/quard-star-upstream/linux-6.1.11/init/main.c:1427
+#1  0xffffffff808a50fa in try_to_run_init_process (
+    init_filename=init_filename@entry=0xffffffff80abebc0 "/sbin/init")
+    at /workspace/quard-star-upstream/linux-6.1.11/init/main.c:1442
+#2  0xffffffff808b34ba in kernel_init (unused=<optimized out>)
+    at /workspace/quard-star-upstream/linux-6.1.11/init/main.c:1575
+#3  0xffffffff800033d4 in handle_exception ()
+    at /workspace/quard-star-upstream/linux-6.1.11/arch/riscv/kernel/entry.S:249
+Backtrace stopped: frame did not save the PC
+(gdb) info registers pc sp a0
+pc             0xffffffff808a504a	0xffffffff808a504a <run_init_process>
+sp             0xff2000000021bea0	0xff2000000021bea0
+a0             0xffffffff80abebc0	-2136216640
+(gdb) list 1423,1435
+1423	static int run_init_process(const char *init_filename)
+1424	{
+1425		const char *const *p;
+1426	
+1427		argv_init[0] = init_filename;
+1428		pr_info("Run %s as init process\n", init_filename);
+1429		pr_debug("  with arguments:\n");
+1430		for (p = argv_init; *p; p++)
+1431			pr_debug("    %s\n", *p);
+1432		pr_debug("  with environment:\n");
+1433		for (p = envp_init; *p; p++)
+1434			pr_debug("    %s\n", *p);
+1435		return kernel_execve(init_filename, argv_init, envp_init);
+(gdb) delete breakpoints
+Delete all breakpoints, watchpoints, tracepoints, and catchpoints? (y or n) y
+(gdb) detach
+Detaching from program: /workspace/-QEMU-RISC-V-Linux-/output/build/linux/vmlinux, process 1
+Ending remote debugging.
+[Inferior 1 (process 1) detached]
+(gdb) quit

@@ -1,0 +1,50 @@
+--- /workspace/quard-star-upstream/target_root_script/etc/init.d/rcS	2026-10-02 11:50:23.000000000 +0000
++++ rootfs/etc/init.d/rcS	2026-11-03 17:40:36.497005177 +0000
+@@ -1,37 +1,11 @@
+-#! /bin/sh
+-PATH=/sbin:/bin:/usr/sbin:/usr/bin
+-LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
+-export PATH LD_LIBRARY_PATH
+-
+-mount -a
+-/sbin/mdev -s
+-mount -a
+-
+-mkdir /dev/pts
++#!/bin/sh
++mount -t proc proc /proc || exit 1
++mount -t sysfs sysfs /sys || exit 1
++mount -t devtmpfs devtmpfs /dev 2>/dev/null || test -c /dev/console || exit 1
++mkdir -p /dev/pts /run /tmp
+ mount -t devpts devpts /dev/pts
+-mount -t 9p -o trans=virtio,version=9p2000.L,msize=16384 hostshare /mnt/
+-
+-/bin/hostname -F /etc/hostname
+-
+-dmesg -n 1
+-chmod 666 /dev/null
+-
+-for i in /etc/init.d/S??* ;do
+-     [ ! -f "$i" ] && continue
+-     case "$i" in
+-	*.sh)
+-	    (
+-		trap - INT QUIT TSTP
+-		set start
+-		. $i
+-	    )
+-	    ;;
+-	*)
+-	    $i start
+-	    ;;
+-    esac
+-done
+-
+-echo "---------------------------------------------"
+-echo " Welcome debugging on Qemu Quard Star board! "
+-echo "---------------------------------------------"
++mount -t tmpfs tmpfs /run
++hostname quard-star-bsp
++printf '\n[INIT] proc/sys/dev ready; starting bsp_demo\n'
++/usr/bin/bsp_demo autostart || printf '[INIT] bsp_demo FAILED\n'
++printf '[INIT] initialization complete\n'

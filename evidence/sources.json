@@ -1,0 +1,26 @@
+[
+  {
+    "name": "quard_star_tutorial",
+    "commit": "083d2dd8337adc0c7fd0522e1d16e075b9f11365",
+    "url": "https://codeload.github.com/QQxiaoming/quard_star_tutorial/tar.gz/083d2dd8337adc0c7fd0522e1d16e075b9f11365",
+    "sha256": "747e698f0762a968e2acae6bb70b7f9a02e34aa0cde460b89072c3e5bc285a9e"
+  },
+  {
+    "name": "riscv64-newlib-gcc",
+    "version": "11.1.0 / 2021.08.07",
+    "url": "https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2021.08.07/riscv64-elf-ubuntu-20.04-nightly-2021.08.07-nightly.tar.gz",
+    "sha256": "b4e8bf5bc41eaac8c786734ad5dfb062fe789fb4b40bfd0c315e8d87edb45c00"
+  },
+  {
+    "name": "newlib-medany-source",
+    "version": "4.1.0",
+    "url": "https://codeload.github.com/mirror/newlib-cygwin/tar.gz/refs/tags/newlib-4.1.0",
+    "sha256": "19bef2689e9ec48354f4a218ba4e1ac6c2531ae1243b9862b325516bbd2731e0"
+  },
+  {
+    "name": "riscv64-linux-gcc11",
+    "version": "11.1.0 / binutils 2.36.1",
+    "url": "https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2021.08.07/riscv64-glibc-ubuntu-20.04-nightly-2021.08.07-nightly.tar.gz",
+    "sha256": "80b18185765b0d1c97122dca6accec0fc9cc0429120c474c0b653d1c5304c0ac"
+  }
+]

@@ -1,0 +1,11 @@
+#!/bin/sh
+mount -t proc proc /proc || exit 1
+mount -t sysfs sysfs /sys || exit 1
+mount -t devtmpfs devtmpfs /dev 2>/dev/null || test -c /dev/console || exit 1
+mkdir -p /dev/pts /run /tmp
+mount -t devpts devpts /dev/pts
+mount -t tmpfs tmpfs /run
+hostname quard-star-bsp
+printf '\n[INIT] proc/sys/dev ready; starting bsp_demo\n'
+/usr/bin/bsp_demo autostart || printf '[INIT] bsp_demo FAILED\n'
+printf '[INIT] initialization complete\n'
